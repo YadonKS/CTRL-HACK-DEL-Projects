@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 const PollingComponent = () => {
   const [isPolling, setIsPolling] = useState(false);
   const [isClient, setIsClient] = useState(false);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     setIsClient(true);
@@ -33,7 +34,26 @@ const PollingComponent = () => {
         })
         .then(data => {
           console.log('Polling successful:', data);
+          setData(data);
           setIsPolling(true);
+
+          // Check the length of the data and send a POST request if greater than 3
+          if (data.length > 3) {
+            fetch('http://localhost:3001/finalCall/run-script/', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ message: 'Data length is greater than 3' })
+            })
+              .then(response => response.json())
+              .then(postData => {
+                console.log('POST successful:', postData);
+              })
+              .catch(postError => {
+                console.error('POST failed:', postError);
+              });
+          }
         })
         .catch(error => {
           console.error('Polling failed:', error);
@@ -51,7 +71,10 @@ const PollingComponent = () => {
   return (
     <div>
       {isPolling ? (
-        <div>Hello I am polling</div>
+        <div>
+          <div>Hello I am polling</div>
+          <pre>{JSON.stringify(data, null, 2)}</pre>
+        </div>
       ) : (
         <div>Hello I stopped polling</div>
       )}

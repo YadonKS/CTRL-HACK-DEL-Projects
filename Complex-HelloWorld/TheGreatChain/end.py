@@ -6,6 +6,12 @@ from cryptography.hazmat.primitives import hashes, serialization
 from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from base64 import b64encode, b64decode
 import os
+import openai
+
+import requests
+
+# Replace with your OpenAI API key
+openai.api_key = 'your-api-key'
 
 def aes_encrypt(data, key):
     iv = os.urandom(16)
@@ -124,15 +130,27 @@ print("Original Message:", message)
 
 # Encrypt
 encrypted_message = encrypt_message(message, aes_key, des_key, blowfish_key, chacha_key, public_key)
+# Format the prompt to clarify the question
+prompt = f"Is the following input a string? Input: {encrypted_message}"
 
+# Call the OpenAI API with the formatted prompt
+response = openai.ChatCompletion.create(
+    model="gpt-3.5-turbo",  # Use gpt-3.5-turbo or gpt-4 if available
+    messages=[
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": prompt}
+    ]
+)
+
+# Extract the response content
+answer = response['choices'][0]['message']['content'].strip().lower()
+if answer == "yes":
 # Decrypt
-decrypted_message = decrypt_message(encrypted_message, aes_key, des_key, blowfish_key, chacha_key, private_key)
-print("Decrypted Message:", decrypted_message)
+    decrypted_message = decrypt_message(encrypted_message, aes_key, des_key, blowfish_key, chacha_key, private_key)
+    print("Decrypted Message:", decrypted_message)
 
 message = encrypted_message
 print("In final Python script with encrypted message:", message)
-
-import requests
 
 # Your API key (replace with your actual API key)
 api_key = '691e66c76de5fb351dd672e7acdb2898f75e72fa86bb04cc4b6e6ef5c37e9854'

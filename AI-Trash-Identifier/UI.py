@@ -4,6 +4,8 @@ import numpy as np
 from tensorflow.keras.models import load_model
 import io
 from PIL import Image
+import json
+import requests
 
 app = Flask(__name__)
 
@@ -34,7 +36,28 @@ def predict():
 
         # Predict with the model
         prediction = model.predict(img_array)
-        result = 'Recycle' if prediction[0] > 0.5 else 'Organic'
+        result = 1 if prediction[0] > 0.5 else 0
+
+        # URL to make the POST request to
+        url = 'https://a14b-198-96-33-206.ngrok-free.app/scan_results'
+
+        # Headers for the POST request
+        headers = {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': 'true'
+        }
+
+        # Create the payload with the prediction result
+        payload = {
+            'scan_result_code': result
+        }
+
+        # Make the POST request with the prediction result
+        response = requests.post(url, headers=headers, data=json.dumps(payload))
+        if response.status_code == 201:
+            print(f"POST successful: {response.json()}")
+        else:
+            print(f"POST failed: {response.status_code}, {response.text}")
 
         return jsonify({'prediction': result})
 
