@@ -1,0 +1,16 @@
+{
+  "name": "frontend2",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-polling": "^1.0.0",
+    "react-scripts": "^5.0.1"
+  }
+}

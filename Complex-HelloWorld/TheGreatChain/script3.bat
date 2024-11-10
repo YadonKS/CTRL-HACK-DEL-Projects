@@ -1,0 +1,3 @@
+@echo off
+echo In Batch script, moving to Ruby...
+ruby script4.rb

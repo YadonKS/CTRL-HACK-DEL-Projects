@@ -1,0 +1,16 @@
+{
+    "scan_results" : [
+        {
+            "scan_id": "1",
+            "scan_result_string": "Organic",
+            "scan_result_code": "1",
+            "scan_result_description": "Organic"
+        },
+        {
+            "scan_id": "2",
+            "scan_result_string": "Recyclable",
+            "scan_result_code": "0",
+            "scan_result_description": "Recyclable"
+        }
+    ]
+}
