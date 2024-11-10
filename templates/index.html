@@ -1,0 +1,46 @@
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trash Identifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Trash Identifier</h1>
+
+        <!-- Form for image upload -->
+        <form action="/predict" method="POST" enctype="multipart/form-data">
+            <label for="file-upload" class="upload-button">
+                <img src="{{ url_for('static', filename='camera_icon.png') }}" alt="Camera Icon">
+            </label>
+            <input type="file" id="file-upload" name="image" accept="image/*" onchange="this.form.submit()">
+        </form>
+    </div>
+
+    <script>
+        function uploadImage() {
+            const fileInput = document.getElementById('file-upload');
+            const formData = new FormData();
+            formData.append('image', fileInput.files[0]);
+
+            fetch('/predict', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Display the result
+                const resultDiv = document.getElementById('result');
+                resultDiv.textContent = data.prediction ? `Result: ${data.prediction}` : 'Error processing image';
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('result').textContent = 'An error occurred. Please try again.';
+            });
+        }
+    </script>
+</body>
+</html>
