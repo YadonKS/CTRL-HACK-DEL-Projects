@@ -153,7 +153,7 @@ message = encrypted_message
 print("In final Python script with encrypted message:", message)
 
 # Your API key (replace with your actual API key)
-api_key = '691e66c76de5fb351dd672e7acdb2898f75e72fa86bb04cc4b6e6ef5c37e9854'
+api_key = 'your-api-key'
 
 # API endpoint for sending emails
 url = 'https://smtp.maileroo.com/send'
