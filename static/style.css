@@ -1,0 +1,121 @@
+/* static/style.css */
+
+body {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Pacifico', cursive;
+    background-color: #f0f8ff;
+    position: relative;
+    padding: 0;
+    border: 30px solid transparent;  /* Start with a basic border */
+    border-image: linear-gradient(45deg, #ff6347, #ff1493, #ff7f50, #8a2be2, #00bfff); /* Define colorful gradient */
+    border-image-slice: 1;  /* Stretch the gradient to cover the border */
+    animation: colorBorder 4s infinite linear;  /* Apply animation to the border */
+}
+
+.container {
+    text-align: left;
+}
+
+/* Define the keyframes for the border animation */
+@keyframes colorBorder {
+    0% {
+        border-image: linear-gradient(45deg, #ff6347, #ff1493, #ff7f50, #8a2be2, #00bfff);
+    }
+    25% {
+        border-image: linear-gradient(45deg, #ff1493, #ff6347, #8a2be2, #ff7f50, #00bfff);
+    }
+    50% {
+        border-image: linear-gradient(45deg, #8a2be2, #ff6347, #ff1493, #ff7f50, #00bfff);
+    }
+    75% {
+        border-image: linear-gradient(45deg, #00bfff, #ff1493, #8a2be2, #ff7f50, #ff6347);
+    }
+    100% {
+        border-image: linear-gradient(45deg, #ff6347, #ff1493, #ff7f50, #8a2be2, #00bfff);
+    }
+}
+
+.title {
+    font-size: 4em;
+    font-weight: bold;
+    position: absolute;
+    top: 10%;  /* Position at the center of the screen vertically */
+    left: 22%; /* Position at the center horizontally */
+    transform: translate(-50%, -50%); /* Offset by half of its width/height */
+    color: #FF6347;
+    background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.upload-button {
+    display: inline-block;
+    cursor: pointer;
+    margin-top: 20px;
+    animation: bounce 1s ease-in-out infinite;  /* Apply bounce animation */
+    position: absolute;
+    top: 50%;  /* Position at the center of the screen vertically */
+    left: 50%; /* Position at the center horizontally */
+    transform: translate(-50%, -50%); /* Offset by half of its width/height */
+}
+
+.upload-button img {
+    width: 80px;
+    height: 80px;
+}
+
+/* Hide the file input */
+#file-upload {
+    display: none;
+}
+
+
+/* Bouncing animation */
+@keyframes bounce {
+    0% {
+        transform: translateY(0);  /* Start position */
+    }
+    30% {
+        transform: translateY(-10px);  /* Move up */
+    }
+    50% {
+        transform: translateY(0);  /* Back to start */
+    }
+    70% {
+        transform: translateY(-5px);  /* Small bounce up */
+    }
+    100% {
+        transform: translateY(0);  /* Back to the original position */
+    }
+}
+
+/*Hovering animation*/
+.upload-button:hover img {
+    transform: scale(1.2);  /* Slightly increase the size of the icon */
+    transition: transform 0.3s ease-in-out;  /* Smooth scaling transition */
+}
+
+/* Style for the result display */
+.result {
+    font-family: 'Arial', sans-serif; /* Change to any font of your choice */
+    font-size: 24px; /* Increase font size */
+    color: #4CAF50; /* Set a color for the text */
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center-align the text */
+    margin-top: 20px; /* Add some space above */
+    padding: 15px; /* Add some padding */
+    border: 2px solid #4CAF50; /* Add a border around the result */
+    border-radius: 10px; /* Round the corners of the border */
+    background-color: #f0f8ff; /* Light background color */
+    animation: fadeIn 0.5s ease-in-out; /* Animation for appearance */
+}
+
+/* Animation to make the result fade in */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
