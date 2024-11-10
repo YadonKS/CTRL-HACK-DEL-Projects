@@ -1,3 +1,3 @@
-<img src="Images/HelloSSD.jpeg" alt="HelloSSD" width="500" />
+<img src="Images/HelloSSD.jpeg" alt="Hello" width="600" />
 
-<img src="Images/WorldSSD.jpeg" alt="WorldSSD" width="500" />
+<img src="Images/WorldSSD.jpeg" alt="World" width="600" />
